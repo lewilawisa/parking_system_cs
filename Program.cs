@@ -64,7 +64,7 @@ namespace parking_system_cs
             Console.WriteLine("Console Parking System in C#\r");
             Console.WriteLine("------------------------\n");
             Console.WriteLine("Choose an option from the following list:\n");
-            Console.WriteLine("\t1|create_parking_lot1 - Create Parking Lot");
+            Console.WriteLine("\t1|create_parking_lot - Create Parking Lot");
             Console.WriteLine("\t2|park - Park Vehicle");
             Console.WriteLine("\t3|leave - Leave Parking Lot");
             Console.WriteLine("\t4|status - Parking Lot Status");
