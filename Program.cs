@@ -64,13 +64,13 @@ namespace parking_system_cs
             Console.WriteLine("Console Parking System in C#\r");
             Console.WriteLine("------------------------\n");
             Console.WriteLine("Choose an option from the following list:\n");
-            Console.WriteLine("\t1|create_parking_lot - Create Parking Lot");
+            Console.WriteLine("\t1|create_parking_lot1 - Create Parking Lot");
             Console.WriteLine("\t2|park - Park Vehicle");
             Console.WriteLine("\t3|leave - Leave Parking Lot");
             Console.WriteLine("\t4|status - Parking Lot Status");
             Console.WriteLine("\t5|type_of_vehicles - Check TypeOfVehicle");
-            Console.WriteLine("\t6|registration_numbers_for_vehicles_with_ood_plate - Check RegistrationNumbersForVehicleWithOddPLate");
-            Console.WriteLine("\t7|registration_numbers_for_vehicles_with_event_plate - Check RegistrationNumbersForVehicleWithEvenPLate");
+            Console.WriteLine("\t6|registration_numbers_for_vehicles_with_ood_plate - Check RegistrationNumbersForVehicleWithOddPlate");
+            Console.WriteLine("\t7|registration_numbers_for_vehicles_with_event_plate - Check RegistrationNumbersForVehicleWithEvenPlate");
             Console.WriteLine("\t8|registration_numbers_for_vehicles_with_colour - Check SlotNumberForVehicleWithColour");
             Console.WriteLine("\t9|slot_numbers_for_vehicles_with_colour - Check SlotNumberForRegistrationNumber");
             Console.WriteLine("\t0|exit - Exit Parking System");
@@ -85,6 +85,19 @@ namespace parking_system_cs
             //    VehicleList.Add(new Vehicle { slot_number = x.ToString() }) ;
             //}
             //Console.Write("Created a parking lot with " + VehicleList.Count()+" slots \n");
+        }
+
+        public Boolean CheckCreate(List<Vehicle> v)
+        {
+            int current_data = v.Count();
+            if (current_data > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public int FindMaxSlot(List<Vehicle> v)
@@ -322,7 +335,7 @@ Console.Write("Sorry, parking lot is full\n");
 
             if (check_slot)
             {
-                if (minute > 0)
+                if (minute > 0 && hour >1)
                 {
                     hour = hour + 1;
                 }
@@ -387,7 +400,7 @@ Console.Write("Sorry, parking lot is full\n");
             Console.ReadLine();
             Console.Clear();
         }
-        public void RegistrationNumbersForVehicleWithOddPLate(List<Vehicle> v)
+        public void RegistrationNumbersForVehicleWithOddPlate(List<Vehicle> v)
         {
             string str = "";
             foreach (var val in v)
@@ -405,12 +418,16 @@ Console.Write("Sorry, parking lot is full\n");
 
                 }
             }
+            if (str.Length < 1)
+            {
+                str = "0";
+            }
             Console.WriteLine(str + "\n");
             Console.Write("Press Enter to continue");
             Console.ReadLine();
             Console.Clear();
         }
-        public void RegistrationNumbersForVehicleWithEvenPLate(List<Vehicle> v)
+        public void RegistrationNumbersForVehicleWithEvenPlate(List<Vehicle> v)
         {
             string str = "";
             foreach (var val in v)
@@ -485,6 +502,10 @@ Console.Write("Sorry, parking lot is full\n");
                     }
                 }
             }
+            if (str.Length < 1)
+            {
+                str = "0";
+            }
             Console.WriteLine(str + "\n");
             Console.Write("Press Enter to continue");
             Console.ReadLine();
@@ -523,12 +544,24 @@ Console.Write("Sorry, parking lot is full\n");
                         }
 
                         //p.Create(int.Parse(input));
-                        p.init_parking_lot = int.Parse(input);
+                        //p.CheckCreate(p.VehicleList);
+                        if (p.CheckCreate(p.VehicleList))
+                        {
+                                                    p.init_parking_lot = int.Parse(input);
                         Console.Write("Created a parking lot with " + p.init_parking_lot + " slots \n");
                         Console.Write("Press Enter to continue");
                         Console.ReadLine();
                         Console.Clear();
                         break;
+                        }
+                        else
+                        {
+                        Console.Write("Please Empty Parking Lot!\n");
+                        Console.Write("Press Enter to continue");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
+                        }
                     case "2":
                     case "park":
                         // Park Vehicle
@@ -597,7 +630,7 @@ Console.Write("Sorry, parking lot is full\n");
                         break;
                     case "6":
                     case "registration_numbers_for_vehicles_with_ood_plate":
-                        // Check RegistrationNumbersForVehicleWithOddPLate
+                        // Check RegistrationNumbersForVehicleWithOddPlate
                         if (p.init_parking_lot < 1)
                         {
                             Console.Write("Please Create Parking Lot!\n");
@@ -607,12 +640,12 @@ Console.Write("Sorry, parking lot is full\n");
                         }
                         else
                         {
-                            p.RegistrationNumbersForVehicleWithOddPLate(p.VehicleList);
+                            p.RegistrationNumbersForVehicleWithOddPlate(p.VehicleList);
                         }
                         break;
                     case "7":
                     case "registration_numbers_for_vehicles_with_event_plate":
-                        // Check RegistrationNumbersForVehicleWithEvenPLate
+                        // Check RegistrationNumbersForVehicleWithEvenPlate
                         if (p.init_parking_lot < 1)
                         {
                             Console.Write("Please Create Parking Lot!\n");
@@ -622,7 +655,7 @@ Console.Write("Sorry, parking lot is full\n");
                         }
                         else
                         {
-                            p.RegistrationNumbersForVehicleWithEvenPLate(p.VehicleList);
+                            p.RegistrationNumbersForVehicleWithEvenPlate(p.VehicleList);
                         }
                         break;
                     case "8":
